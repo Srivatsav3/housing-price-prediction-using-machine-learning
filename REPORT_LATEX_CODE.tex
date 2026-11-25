@@ -1,0 +1,1174 @@
+\documentclass[12pt, a4paper, oneside]{book}
+
+% Core packages for document setup and mathematics
+\usepackage{geometry}
+\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+\usepackage{setspace}
+\renewcommand{\baselinestretch}{1.5}
+\usepackage{amsmath, amssymb, eucal, mathrsfs}
+\usepackage{graphicx}
+\usepackage{booktabs, array, longtable, ltxtable, tabularx}
+\usepackage{ragged2e}
+\usepackage{natbib}
+\usepackage{caption}
+\usepackage{pdflscape}
+\usepackage{tikz, tikz-3dplot}
+\usetikzlibrary{decorations.fractals, decorations.footprints}
+\usepackage{tkz-euclide}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{fancyhdr}
+
+\usepackage{microtype}
+\usepackage{lmodern}
+
+% Input and font encoding (loaded after other packages)
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% Font package (loaded last in preamble)
+\usepackage{palatino}
+
+% Custom color definitions
+\definecolor{mygreen}{HTML}{622567} % Purple
+\definecolor{Gray}{HTML}{333333} % Gray
+\definecolor{myred}{HTML}{D55C19} % EssexOrange
+\definecolor{myblue}{HTML}{007A87} % Seagrass
+\definecolor{Mint}{HTML}{35C4B5} % Mint
+
+% Custom mathematical commands
+\newcommand{\re}{\mathrm{e}}
+\newcommand{\ri}{\mathrm{i}}
+\newcommand{\rd}{\mathrm{d}}
+\newcommand{\semicolon}{\nobreak\mskip2mu\mathpunct{}\nonscript\mkern-\thinmuskip{;}\mskip6muplus1mu\relax}
+\newcommand{\grole}{\mathrel{\mathchoice {\vcenter{\offinterlineskip\halign{\hfil
+$\displaystyle##$\hfil\cr>\cr\noalign{\vskip-1.5pt}<\cr}}}
+{\vcenter{\offinterlineskip\halign{\hfil$\textstyle##$\hfil\cr
+>\cr\noalign{\vskip-1.5pt}<\cr}}}
+{\vcenter{\offinterlineskip\halign{\hfil$\scriptstyle##$\hfil\cr
+>\cr\noalign{\vskip-1pt}<\cr}}}
+{\vcenter{\offinterlineskip\halign{\hfil$\scriptscriptstyle##$\hfil\cr
+>\cr\noalign{\vskip-0.5pt}<\cr}}}}}
+\newcommand{\Ad}{\mbox{Ad}}
+\newcommand{\im}{\mbox{Im}}
+\renewcommand{\Re}{\mbox{Re}\;}
+\newcommand{\ad}{\mathrm{ad\,}}
+\newcommand{\openone}{\leavevmode\hbox{\small1\kern-3.3pt\normalsize1}}
+\newcommand{\Res}{\mathop{\mbox{Res}\,}\limits}
+\newcommand{\biglb}{\big[\hspace*{-.7mm}\big[}
+\newcommand{\bigrb}{\big]\hspace*{-.7mm}\big]}
+\newcommand{\bigrbt}{\mathop{\bigrb }\limits_{\widetilde{\;}}}
+\newcommand{\biggrbt}{\mathop{\biggrb }\limits_{\widetilde{\;}}}
+\newcommand{\Bigrbt}{\mathop{\Bigrb }\limits_{\widetilde{\;}}}
+\newcommand{\Biggrbt}{\mathop{\Biggrb }\limits_{\widetilde{\;}}}
+\newcommand{\bPhi}{\mathbf{\Phi}}
+\newcommand{\bM}{\mathbf{M}}
+\newcommand{\bm}{\mathbf{m}}
+\newcommand{\bbbc}{\mathbb{C}}
+\newcommand{\bbbr}{\mathbb{R}}
+\newcommand{\bbbz}{\mathbb{Z}}
+\newcommand{\bbbs}{\mathbb{S}}
+\newcommand{\diag}{\mbox{diag}\,}
+\newcommand{\tr}{\mbox{tr}\,}
+
+% Custom environments
+\newenvironment{rcases}{\left.\begin{aligned}}{\end{aligned}\right\rbrace}
+\newenvironment{lcases}{\left\lbrace\begin{aligned}}{\end{aligned}\right.}
+\newenvironment{proof}[1][Proof]{\begin{trivlist}\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{solution}[1][Solution]{\begin{trivlist}\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+% Theorem-like environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+% QED symbol
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+
+
+% Page layout
+\textwidth=17cm
+\textheight=24.5cm
+\voffset=-2cm
+\evensidemargin=-0.5cm
+\oddsidemargin=-0.5cm
+
+% Remove headers completely
+\pagestyle{plain}
+\renewcommand{\headrulewidth}{0pt}
+
+% Array column spacing
+\arraycolsep=2pt
+
+% Custom chapter formatting
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\color{myred}}
+  {\filleft\hspace*{-60pt}%
+    \rotatebox[origin=c]{90}{%
+      \normalfont\color{black}\Large%
+        \textls[180]{\textsc{\chaptertitlename}}%
+    }\hspace{10pt}%
+    {\setlength\fboxsep{0pt}%
+    \colorbox{myred}{\parbox[c][3cm][c]{2.5cm}{%
+      \centering\color{white}\fontsize{80}{90}\selectfont\thechapter}%
+    }}%
+  }
+  {10pt}
+  {\titlerule[2.5pt]\vskip3pt\titlerule\vskip4pt\LARGE\sffamily}
+
+% Hyperref for cross-referencing (loaded last)
+\usepackage{aliascnt}
+\usepackage[colorlinks,linkcolor=myblue,citecolor=mygreen]{hyperref}
+
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{minipage}{0.2\textwidth}
+\centerline{\includegraphics[width=.4\textwidth]{essex}}
+\end{minipage}
+\begin{minipage}{0.8\textwidth}
+$ \qquad \qquad \qquad ${\LARGE \bf \sl University of Essex}
+
+{\LARGE \bf Department of Mathematical Sciences}
+\end{minipage}
+
+\begin{center}
+\noindent\textcolor{myred}{\rule{\linewidth}{4.8pt}}
+
+\vspace{1cm}
+
+{\LARGE \sc MA981: Dissertation}
+
+\vspace{1.5cm}
+
+{\Huge{\color{myblue} A Data-Driven Approach to Housing Price Prediction Using Machine Learning Algorithms}}
+
+\vspace{1.5cm}
+
+{\Large \bf Krishna Satya Srivatsava Pillutla}
+
+{\Large \bf 2401106}
+
+\vspace{2.0cm}
+
+{\Large {Supervisor: Dr. Tao Gao}}
+
+\vspace{.25cm}
+
+\noindent\textcolor{myred}{\rule{\linewidth}{4.8pt}}
+
+\vspace{1cm}
+{\Large \today}\\[4pt]
+{\Large Colchester}
+\end{center}
+\newpage
+
+% Abstract
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+The machine learning techniques analyzed in this study of UK home price prediction include Linear Regression, Random Forest, and Gradient Boosting. The data (2015-2024) was sourced on Kaggle, processed to take care of missing data, encoding of categorical features, and normalization of the data. The evaluation metrics used were R², RMSE, and MAE. The most reliable results were obtained using the Linear Regression, and an R² of 0.058 was generated with a Positive value, RMSE of 581,571 pounds and MAE of 160,781 pounds. This made conclusions easy because they were more reliable compared to the random forest and the gradient boosting which made unstable predictions that had negative R² value and were less reliable. Negative values of R² are indicators of low generalization because of the data skewness and the presence of outliers, and methods designed to address such an issue are unsatisfactory on an ensemble basis. The SHAP and LIME helped to open up the black box, and the key variables that had the greatest influence were the type of property, county, and district; the year and new build status also determined projections. The findings stress the importance of interpretability, feature engineering, and data quality in the development of trustworthy systems for predicting home prices.
+
+\newpage
+\tableofcontents
+\newpage
+\listoftables
+\newpage
+\listoffigures
+
+\chapter{Introduction}\label{ch:1}
+
+The dynamic housing market affects all levels of society: individuals, companies, and governments. House values are determined by factors like the character of the community, property size, amenities, location, and general economic conditions (Phan, 2018). Consumers, sellers, investors, financial institutions, and all people in the overall economy depend on the correct estimates of pricing to make informed decisions, charge their competitors, assess their possibilities, and risks of financing (Satish et al., 2019). Due to the complicated, non-linear, and occasionally unpredictable relationships between these factors, house price forecasting is a tricky venture.
+
+Staples of old-fashioned valuation, such as the hedonic pricing models and comparative market analysis, depend on human judgment and analytics. Although very popular and almost universal, these kinds of algorithms often ignore intricate details of vast and varied datasets. Data-oriented approaches are increasingly appealing to more and more data and computer power (Truong et al., 2020). An application of ML systems is the creation of practical prediction models; such systems are able to work with both organized and non-structured data, identify patterns in it, etc.
+
+A data-centric model of forecasting is where demographic data are used in conjunction with geographical characteristics, previous transactions and other demographic factors, together with underlying market data, to build models that are dynamic and capable of adapting to ever changing situations. Madhuri et al. (2019) conclude that the model can both process the complex interactions of features and automatically update itself as new data is received. The number of ML-based improvements that the real estate business may harness a plethora of is enormous: making decisions more efficiently, being more productive, having a higher growth potential, and being able to predict things more accurately.
+
+In an attempt to offer a model on predicting future prices of homes, this thesis would study and analyze some machine learning approaches. In the aim of the facilitation of effective decision-making, the given research will present the image of the housing market system and the potential advantages of ML as compared to the critical challenges, choice of features, support of algorithm modelling, and improving data pretreatment. More probably, ML models will be not only precise but also implementable.
+
+Home prices are well-established within the real estate sector with the help of which a large variety of transactions are based, such as purchase, sale, investment, and loan application. Since long ago, individuals have been using expert valuation, mathematical regression models, and comparative market analysis to make inferences about the value of homes (Milunovich, 2020). Given the complexity of the modern housing market, these methods can at best precisely reflect a smaller set of the most significant market features. The values of real estate are calculated under several conditions, such as the location of the property, the economic situation, the interest rates, and the mood of the market (Zhao et al., 2019). Such interactions are notoriously difficult to predict because they are non-linear and may suffer sudden changes.
+
+In the realm of the technical innovations in the contemporary society, including the application of information strategies, complex computer methods, and big data, the ability to estimate the future worth of a property over time has increased (Ray, 2019). This has seen the evolution of data-driven approaches to identifying patterns, determining links and accurate predictions made with the help of ML algorithms.
+
+The possibility of analyzing the high-dimensional data and adapting to the uncertain dynamics of the market is provided by decision trees, ensemble techniques, deep learning models, linear regressions, nonlinear regressions, and a plethora of other machine learning algorithms. Specifically, the interaction with complex phenomena can be easily dealt with by using ML algorithms since they do not rely on assumptions as compared to their traditional counterparts. The ability of predictive modeling to optimize the decision-making of a large number of stakeholders has caused a rapid increase in the popularity of the field of real estate in recent years (Pallonetto et al., 2019). Precise predictions can ensure that financial institutions reduce risk in loans, investors find great opportunities, and buyers and sellers come up with a good price. With such data-and-ML-driven model of home price prediction in place, the real estate market can become more transparent, efficient, and trustworthy.
+
+The machine learning techniques analyzed in this study of UK home price prediction include Linear Regression, Random Forest, and Gradient Boosting. The data (2015-2024) was sourced on Kaggle, processed to take care of missing data, encoding of categorical features, and normalization of the data. The evaluation metrics used were $R^2$, RMSE, and MAE. The most reliable results were obtained using the Linear Regression, and an $R^2$ of 0.058 was generated with a Positive value, RMSE of 581,571 pounds and MAE of 160,781 pounds. This made conclusions easy because they were more reliable compared to the random forest and the gradient boosting which made unstable predictions that had negative $R^2$ value and were less reliable. Negative values of $R^2$ are indicators of low generalization because of the data skewness and the presence of outliers, and methods designed to address such an issue are unsatisfactory on an ensemble basis. The SHAP and LIME helped to open up the black box, and the key variables that had the greatest influence were the type of property, county, and district; the year and new build status also determined projections. The findings stress the importance of interpretability, feature engineering, and data quality in the development of trustworthy systems for predicting home prices.
+
+
+\section{Aim}
+
+The aim of the study is to develop and evaluate machine learning models for accurate housing price prediction by integrating interpretability techniques such as SHAP and LIME to enhance transparency and explainability in the prediction process.
+
+\section{Objectives}
+
+The objective of this study is to offer a stable and easy to interpret methodology of forecasting the prices of homes in the UK. This will be done by gathering, pre-processing and preparing information about the housing market to be subjected to machine learning modeling; it will ensure consistency and quality of the data. In the following part, several supervised regression methods will be tested to predict home prices, i.e., Gradient Boosting, Linear Regression and Random Forest. In order to make a clear comparison, appropriate regression indicators such as RMSE, MAE and R$^2$ will be employed to determine the performance of the models. The interpretability approaches such as SHAP and LIME are also employed by the study to explain the reasoning behind the labeling of the model predictions, at the global and local levels, which adds weight to the findings. The ultimate aim is to identify the most predictive and interpretable regression model so that the housing sector players, investors and legislators can be fed on the results.  
+
+\textbf{}
+
+
+\textbf{We aim to answer the following questions:}
+
+\begin{enumerate}
+\item What preprocessing and feature engineering techniques best prepare housing market data for regression-based machine learning models?
+\item How do different supervised regression algorithms compare in terms of accuracy and robustness for housing price prediction?
+\item Which features most significantly influence housing price predictions according to SHAP and LIME analyses?
+\item How can interpretability tools improve transparency and trust in machine learning-based housing price predictions?
+\item Which regression model offers the best balance between predictive performance and explainability for practical applications in the housing market?
+\end{enumerate}
+
+Property speculators, bankers, legislators, and aspiring home buyers have long fought to be sure about the future price of property. Although they dominate the industry, standard valuation techniques often do not provide sufficient consideration to the multiplicity of non-linear influences that collectively affect the price of properties, such as geography, economic trends, infrastructural development, and local amenities, among others (Pallonetto et al., 2019). With the growing smartness and ubiquity of housing data and the advent of machine learning (ML), there is an opportunity to make the models used to quantify the value of properties much more accurate, flexible, and transparent.
+
+
+Supervised regression models, together with other machine learning algorithms, perform very well on high-dimensional data and appear to discover patterns that are difficult to identify via classical statistics methodology. Consequently, models of market predictions could be applied, allowing them to expand along with the market and adapt to novel situations (Pallonetto et al., 2019). However, regarding critical financial decisions, the lack of interpretability of most ML models is a significant handicap that may preclude certainty and acceptance.
+
+
+The problem can be addressed with the help of interpretability methods, such as SHAP and LIME, that illuminate global and local effects of the features on the prediction. This assists in making more informed decisions by different parties and enhances transparency in models. The rationale of the current study is to identify the most appropriate regression model in terms of predictive accuracy and the ability to interpret the outcomes in estimating house prices. The project aims to increase the reliability, utility, and practice of ML models in the housing industry by integrating data-based prediction methods with sturdy interpretability practices.
+
+
+The implications of the discovery are significant because it can decrease the differences between the simple estimations of the prices of houses and the accurate assumptions. Accurate price projections are essential in the eyes of the real estate investors who are looking at a healthy return, the buyers who are looking at a fair value, the sellers who are looking at establishing fair prices, and the financial institutions who are looking at evaluating loan risk. The classical methods of property valuation still have their applications, but often they do not capture the complex non-linear relationships because they over rely on few factors.
+
+
+The study demonstrates that it is possible to apply supervised machine learning to construct regression models which can discover patterns within multi-dimensional, massive data sets that would not be detected otherwise. The developed models based on these approaches would exploit the interpretability tools such as SHAP and LIME to ensure the stakeholders can rely on and comprehend the logic behind each prediction. This degree of confidence means that the models can be applied more widely within the decision-making framework, which bears a considerable financial cost because of the lack of trust in automation.
+
+
+Both academicians and business individuals can utilize the simplicity of use of automated methods and the accuracy of various types of regression models in the process of determining the value of property. Besides these possible applications, the results can be used to mark a way to new developments in the property evaluation AI systems, real estate platforms, and personal finance tools. Ultimately, our work is useful to real estate ecosystems in terms of improved decision-making through better construction of predictive models that are more credible, interpretable and accessible to intuition.
+
+
+It is very difficult to predict the value of the home due to a number of variables. These would be the nature of the property, the place, the attractions of the neighborhood, economic factors and the market forces. Two examples of classical valuation are Hedonic pricing models and comparative market analysis. The two methods use limited variables and assume the existence of a linear relationship between features and prices. These approaches can overlook nonlinear patterns and complex associations among variables that could be why the cost estimate is misaligned.
+
+
+One of the strongest aspects of machine learning (ML) is the ability to search through different and wide datasets to find complicated patterns that are missed by traditional models. Although ML models, including Random Forests or Gradient Boosting, may deliver impressive prediction accuracy, such models may be hard to deal with once they are usually opaque. The real estate market is highly stakes and requires transparent inputs to project projections accurately and the opaque nature of these models could damage it.
+
+
+One of the most important issues then is the formation of an adequate and understandable predictive model in the framework of the features, on which the prediction is made. This piece of work seeks to address the gap in functionality and opaqueness in ML models that are developed on regression methods through implementing interpretability methods such as SHAP and LIME. The aim is a solid, precise, and above all solution to address practical problems in housing market forecast.
+
+
+
+\textbf{}
+
+\textbf{Here is the outline of the whole project:}
+
+\textbf{Chapter 1 -- Introduction}
+\begin{itemize}
+\item Introduction -- Overview of the housing market, importance of accurate price prediction, and the role of data-driven approaches.
+\item Background -- Traditional valuation methods vs. machine learning approaches, challenges, and opportunities.
+\item Aim and Objectives -- Study aim and specific measurable objectives.
+\item Research Questions -- Key questions guiding the investigation.
+\item Research Rationale -- Justification for using ML regression models combined with interpretability tools.
+\item Research Significance -- Importance for stakeholders, academic contribution, and real-world applications.
+\item Problem Statement -- Identification of the research problem and need for the study.
+\end{itemize}
+
+\textbf{Chapter 2 -- Literature Review}
+\begin{itemize}
+\item Overview of Housing Price Prediction Studies -- Review of global and regional research.
+\item Traditional Valuation Approaches -- Comparative analysis and limitations.
+\item Machine Learning in Housing Price Prediction -- Overview of regression models (Linear Regression, Random Forest, Gradient Boosting, SVR).
+\item Model Interpretability -- Importance and role of SHAP and LIME in explaining predictions.
+\item Research Gap -- Identification of gaps in existing studies that the research will address.
+\end{itemize}
+
+\textbf{Chapter 3 -- Methodology}
+\begin{itemize}
+\item Research Design -- Quantitative, data-driven experimental approach.
+\item Dataset Description -- Source, features, and target variable.
+\item Data Preprocessing -- Handling missing values, outliers, encoding, and scaling.
+\item Feature Engineering -- Creation of derived features for improved prediction.
+\item Model Selection -- Linear Regression, Random Forest, Gradient Boosting, SVR.
+\item Evaluation Metrics -- RMSE, MAE, $R^2$.
+\item Model Interpretability -- Application of SHAP and LIME for global and local explanations.
+\item Tools and Libraries -- Python (scikit-learn, XGBoost, SHAP, LIME, pandas, NumPy, matplotlib, seaborn).
+\end{itemize}
+
+\textbf{Chapter 4 -- Results and Analysis}
+\begin{itemize}
+\item Model Performance Comparison -- Accuracy and error metrics.
+\item Feature Importance Analysis -- Insights from SHAP and LIME.
+\item Discussion -- Interpretation of results and comparison with literature.
+\end{itemize}
+
+\textbf{Chapter 5 -- Conclusion and Recommendations}
+\begin{itemize}
+\item Summary of Findings -- Key results from models and interpretability analysis.
+\item Practical Implications -- Benefits for stakeholders in real estate.
+\item Limitations -- Constraints of the study.
+\item Future Work -- Directions for further research.
+\end{itemize}
+
+% Set chapter counter to 1 so next chapter becomes Chapter 2
+\setcounter{chapter}{1}
+
+\chapter{Literature Review}\label{ch:2}
+This part of the study reviews the previous works on the prediction of the house prices starting from basic valuation approaches to sophisticated ML. The chapter 2 begins with the notion that accurate property valuations are needed in the real estate market and that there are traditional approaches that won’t fully satisfy the need such as hedonic pricing models and comparative market analyses. To discuss what machine learning can do in real estate analytics, the role of machine learning in retaining nonlinear, complex correlations is brought to the forefront when it comes to housing data. Some of the supervised regression models, which are analysed in detail, are Linear Regression, Random Forest, Gradient Boosting, and Support Vector Regression, in addition to the efficiency of these models as per prior to the current studies. Another topic of interest discussed in this chapter is the need to pay more attention to the interpretability of models, or the problem of transparently making predictions. Finally, it also establishes the basis of methodology and procedures of the current study by determining the research gaps.
+
+
+Hoxha, (2025), compares and contrasts 4 machine learning models in order to predict the prices of Prishtina homes, namely: support vector regression, k-nearest neighbors, decision trees, and linear regression. Models were assessed on a set of 1,512 property transaction data points using measures like root mean squared error, mean absolute error, coefficient of determination, and mean squared error through the use of Python. There is also a significance of the variables test in the research. The data was preprocessed and standardized, and the models were evaluated thereafter. The others were outperformed by the decision tree model. According to the variable importance test, all other models except the support vector machine model showed that the distance to the central business district and its distance to the road were the most significant in computing the prices of housing.
+
+
+In late 2021, Chinese real estate started collapsing two decades after breakneck development. Hence, the future of property value cannot be predicted by the government and investors. The authors explore quarterly national residential property price index data, which are available at the Bank for International Settlements, of China between the second quarter of 2005 and the first quarter of 2024, using Gaussian process regression with different kernels and basis functions. Estimation of the models through cross-validation and the use of Bayesian optimisations depends on the improvement of the predicted improvement per second, plus the method of forecasting the models (Jin and Xu, 2025). Gaussian process regression models might make better forecasts when coupled with Bayesian optimizations. The models also correctly forecasted price indices between the third quarter of 2020 and the first quarter of 2024 out of sample with a relative root mean square error of 0.1291 percent, root mean square of 0.1816, mean absolute error of 0.1527, and correlation coefficient of 99.901 percent. Gaussian process regression techniques are superior to other machine learning and econometric techniques. They have predictions that stand against other out-of-sample testing intervals (Jin and Xu, 2025). The results can be used in isolation or combined with other estimates to test the trend of the residential real estate price index and research policy.
+
+
+A complete understanding of home prices and reasons explains why policymakers can regulate the housing market and understand housing demand. Either traditional studies forget to consider complex, non-linear factors, or they study local amenities and forget the streetscape. The article combines the characteristics of streets with explainable machine-learning house prices to enrich the available literature (Luo et al., 2025). The semantic segmentation of photos of the street viewed provided quantification of the five perceptions of greenness, openness, enclosure, walkability, and imagination. The house cost was approximated by a gradient-boosting decision tree (GBDT) model with 17 explanatory variables about the features of the neighborhood and living convenience. The model produces significant results over the linear model (increased by 47.87 percent). Street-perception features were added and led to a 26.15\% improvement in R2 (Luo et al., 2025). Diagramming the partial dependencies assists in describing difficult nonlinear relationships and interaction effects. The results offer specific recommendations concerning the development of the neighborhoods to draft a healthy housing market and urban fairness.
+
+
+Land information assists individuals, companies, and governments in their planning for climate change, housing requirements, and economic expansion. IT developments facilitate the production, analysis, and dissemination of data related to land-related events knowledge. Property technology increases the efficacy and sustainability of land administration via the use of location information. GeoAI enables solving geographical dilemmas by drawing knowledge out of complex information (Mete, 2025). To be able to make geographical evaluations of the locational variables, the property value has to have a model that is spatially explicit. This piece applies GeoAI to elaborate a mass value model based on the Land Administration Domain Model (LADM) of Great Britain. Initially, the LADM Valuation Information package is aligned with the organization structure of the country and augmented to establish a country profile. The conceptual model and database schema development come after, which will be translated into the physical model (Mete, 2025). The sources of mass values in the database are analyzed by the methods of Spatial and Random Forest regression. Therefore, a correct and full valuation procedure is required under the global rules of land administration.
+
+
+As per Das et al., (2025), to simulate home prices, which is a generalization of the standard Laplace distribution. In the following analysis, some key points about the new distribution can be inferred. The new model extension and the Laplace extension of risk assessment of the entire economy were conducted with the help of multiple measures, including value-at-risk (VaR), PORT-VaR, TVaR, MOP, and PORT-MOP on the basis of the mean of order-P. Making sense of extreme median values of Boston home prices, these measures represent numerous properties of the tail behavior. Although VaR, TVaR are focused on estimating losses with some levels of confidence, TVaR allows estimating nine significant tail risks; nevertheless, in order to make risk analysis more rigorous concerning calculation methods, PORT-VaR has added randomization to the selection of the thresholds of choice. In the case of uncertainty, the MOP technique enables one to perform optimally and at the same time, satisfy their dependability demands.
+On the basis of historical statistics of an interesting and constantly evolving market, Sung, (2025), developed a model to predict house prices in Washington, D.C. The long history of housing data allows anyone to create the prediction models depending on the criteria such as the vicinity to schools and convenient transport, and some area and quadrant data, property size, rooms number and other advantages. Thereafter, the authors applied K-means clustering in order to deal with class imbalance. It assisted in defining pertinent subgroups, and the authors arbitrarily oversampled the underrepresented groups to equate them. The authors did comparisons in terms of RMSE and R2 to evaluate Random Forest and Gradient Boosting as machine learning methods. Unlike the other, simpler models, which performed better in terms of anticipated accuracy, the ensemble methods accurately captured the more complex nature of the housing price prediction. The introduction of machine learning algorithms, which in itself offers plenty of scope for theoretical and practical data analytical work in the field of real estate, serves as a good starting point for comparative studies.
+
+
+
+\section{Regression Models in House Price Predictions}
+
+\subsection{Linear Regression}
+
+Alterations in the price of real estate have many implications that affect the economic activities of financial markets, companies, and economies all around the globe. To figure out the factors that have the most influence on real estate market price, the study employs a multiple linear regression analysis (Hu, 2025). Everything begins with an intensive search of the literature that contains the theoretical models that influence real estate prices. Multiple regression analysis was conducted on the data from 2021-2024, in order to find what factors influenced property prices. These conditions indicate that stock market volatility, exchange rates between the renminbi and the dollar, as well as the consumer price index will affect home prices. The conclusions and suggestions of the present study aimed at informing policymakers and actors of market actors to realize and estimate the trends of the real estate market (Hu, 2025). As a consequence, the formulation of sound strategies and policies to stabilize and expand the real estate industry becomes easy.
+
+
+Both the economic centers and the scarcity of available land cause high demand for houses in big cities, which further increases property prices. This is the reason builders are capitalizing on the easy access to transportation systems, reaching the periphery of cities, and offering good incentives such as zero down payment, low mortgage rates, and a large variety of design options at lower prices (Azam et al., 2025). Such factors as location, size of the land, space available to the building, and the type of property are rather significant since homeownership is a significant long-term investment. The research is a quantitative approach since it collects measurable data and examines it in mathematical, statistical, and computerized forms. The article explores the most effective ways of collecting data, cleaning the data, extracting features, training the models, and testing the performance of the models to understand and predict the values of the properties. Measurement is also vital in the collection of useful information (Azam et al., 2025). Also, the following analysis of the literature highlights the key trends in this field, indicates the research gaps, and, finally, offers a data-driven paradigm of improved home price prediction.
+
+
+
+\subsection{Support Vector Regression}
+
+Traditional real estate analysis is not accurate because of the biases and variabilities of the traditional evaluation methods, which are addressed in order to harness advanced machine learning algorithms. This paper employs the support vector regression (SVR) and gradient boosting machine (GBM) to estimate the property values and serve the interests of buyers, sellers, and policymakers (Shbool et al., 2025). The other objective of this study is also to address the gap in the application of machine learning in emerging states such as Jordan. This project is aimed at ensuring an efficient, easy-to-understand, and reliable property-valuation instrument that would enhance effective market operation and guarantee certainty in transactions. The SVR is more accurate than GBM in predicting real estate values since it has the least RMSE (0.31) and MAPE (25\%). The most telltale factors are the area, the place, and the type of apartment with regard to the price. The study reveals that conventional evaluation approaches are more incorrect than machine learning algorithms (Shbool et al., 2025). The results imply that data-driven mechanisms of appraisal ought to be adopted by real estate markets to limit the use of subjectivity. This made the study useful and precise, as a user-friendly tool was generated to foresee property prices by nontechnical persons.Accurate estimations of real estate prices, both by sellers and buyers, are required, and it is a critical task in the property markets. The relationships between property attributes and market dynamics are complex and nonlinear, and the established valuation techniques find it difficult to measure such interactions. 
+
+
+Zhamakeev and Matanov, (2025), explored the pricing algorithm of Applications of Machine Learning to predict the pricing of apartments using the dataset of house advertisements on a real estate webpage in one of the Kyrgyz cities. The six models, which are tested, are Support Vector Machine, Decision Tree, Ridge, Lasso, and Linear Regression. The two variables of goals, which are explored, are total price and price per square meter, to ensure that the direct and normalized pricing techniques can be compared. Some of the measures to assess the model's performance include the R-squared, Mean Absolute Percentage Error, Root Mean Squared Error, and Mean Absolute Error. In both of the objectives, Random Forest is the best model regarding its accuracy in predicting and generalizability. Through the ensemble learning, the findings revealed that the valuation work in the real estate can be performed successfully, and also give some practical recommendations on the application of the ML models in the automation of property valuation systems.
+
+
+
+\subsection{Decision Tree Regression}
+
+One of the most important reasons why it is essential to predict the prices of homes with any degree of certainty is to alert policymakers and investors to what happens within the housing market. Gaps in time diminish the accuracy of past modeling that is affected by government reports on macroeconomic data (Jiang, 2025). The study is a novel study of forecasting precision with the applied exploitation of Google Trends data as the attitude front-runner. Recursive Feature Elimination (RFE) is a way of enhancing the quality of the data using the method of dropping unwanted features. The subsequent step will involve forecasting how the US House Price Index (HPI) will increase by a Gradient Boosting Decision Tree (GBDT) model. Compared with models using HPI alone, the models using Google Trends data in the model, a long-term accuracy of their predictions that is much higher and more consistent as well (Jiang, 2025). The three most relevant categories according to Google Trends were identified as house rent, housing market \& real estate market, and mortgage \& real estate agency, which emphasize their importance in gaining an understanding and prediction of the developments of growth or decline rates of HPI.
+
+
+In order to have informed real estate decisions, we need to know what home prices will be in the future. Hussain et al., (2025), proposed in this study an AI-assisted prediction system with a combined feature optimization and statistical analysis based on analysis of variance (ANOVA) and genetic algorithms (GA). In this case, the authors applied ML models on a big dataset to test and assess the following five ensemble models of ML, such as Extreme Gradient Boosting Regression (XGBR), random forest regression (RFR), Categorical Boosting Regression (CBR), Adaptive Boosting Regression (ADBR), and Gradient Boosted Decision Trees Regression (GBDTR). To carry out the external validation process, we used a primary data set with 1000 samples as well as eight characteristics, and additionally used 3865 training samples. Categorical Boosting with GA (CBRGA) proved to be the best performer, achieving an R2 of 0.9973 and outpacing most of the state-of-the-art methods, with some methods achieving an R2 lower than 0.9. The ANOVA-based analysis is more efficient in enhancing interpretability and quality of results in the model by separating vital variables such as lot size and square footage. Explainable AI methods, such as SHAP and LIME, that can intelligently inform the model's decision-making and feature importance, as well as 10-fold cross-validation to ensure robustness and understandability, are used.
+
+
+\begin{table}[htbp]
+\centering
+\caption{Literature Review Summary}
+\label{tab:literature_summary_detailed}
+\footnotesize
+\begin{longtable}{|p{1.5cm}|p{2.2cm}|p{2.0cm}|p{2.5cm}|p{2.8cm}|p{2.5cm}|}
+\hline
+\textbf{Author(s) \& Year} & \textbf{Focus of Study} & \textbf{Methodology / Model Used} & \textbf{Dataset \& Features} & \textbf{Key Findings} & \textbf{Limitations / Gaps} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{Author(s) \& Year} & \textbf{Focus of Study} & \textbf{Methodology / Model Used} & \textbf{Dataset \& Features} & \textbf{Key Findings} & \textbf{Limitations / Gaps} \\
+\hline
+\endhead
+
+Hoxha (2025) & Compare 4 ML models for predicting Prishtina home prices & SVR, KNN, Decision Trees, Linear Regression & 1,512 property transactions; distance to CBD, distance to road & Decision Tree performed best; distance to CBD \& road were most important & Limited to a single city; small dataset \\
+\hline
+Jin and Xu (2025) & Forecast Chinese residential property price index & Gaussian Process Regression + Bayesian Optimization & BIS data (2005--2024) & High accuracy; superior to other models; RRMS error 0.1291\% & Focused on macroeconomic index, not individual properties \\
+\hline
+Luo et al. (2025) & Include streetscape perceptions in house price models & GBDT with 17 neighborhood \& convenience variables & Street images segmented for greenness, openness, walkability, etc. & Adding street features improved R² by 26.15\% & Limited geographic scope \\
+\hline
+Mete (2025) & GeoAI for mass property valuation & Spatial \& Random Forest regression & Great Britain LADM model & Developed a spatially explicit valuation model & Focused on land admin framework \\
+\hline
+Das et al. (2025) & Tail risk analysis in Boston home prices & Laplace distribution extension, VaR, TVaR, MOP & Boston housing prices & Captures extreme tail risk behavior & Not a direct predictive model \\
+\hline
+Sung (2025) & Predict Washington, D.C. prices & K-means clustering, Random Forest, Gradient Boosting & Long-term housing data, school proximity, transport, and property size & Ensemble models outperformed simpler models & Localized to one city \\
+\hline
+Hu (2025) & Multiple linear regression for real estate & Multiple Regression Analysis & 2021--2024 housing \& economic data & Stock market volatility, exchange rates, and CPI affect prices & Ignores nonlinear effects \\
+\hline
+Azam et al. (2025) & Factors affecting city housing prices & Quantitative approach & Location, land size, building space, and property type & Highlights data-driven analysis for price prediction & Lacks model comparison \\
+\hline
+Shbool et al. (2025) & Compare SVR vs GBM in Jordan & SVR, GBM & Property value data (area, location, type) & SVR outperformed GBM & Focus on emerging markets only \\
+\hline
+Zhamakeev and Matanov (2025) & Predict Kyrgyz apartment prices & SVM, Decision Tree, Ridge, Lasso, Linear Regression, Random Forest & Real estate ads & Random Forest is best for accuracy \& generalization & Small, localized dataset \\
+\hline
+Jiang (2025) & Forecast US HPI with sentiment data & RFE + GBDT & Google Trends + HPI & Trends data improved long-term accuracy & Focused on macro trends, not property-level \\
+\hline
+Hussain et al. (2025) & AI-assisted prediction with explainable AI & ANOVA, GA + XGBR, RFR, CBR, ADBR, GBDTR & 4,865 samples, 8 features & CBRGA best (R²=0.9973); SHAP/LIME for interpretability & High complexity may require large datasets \\
+\hline
+\end{longtable}
+\end{table}
+
+Machine learning models that have been used in similar previous research on home price prediction are far too many to list, but simply include Decision Trees, Random Forest, Gradient Boosting, Support Vector Regression, and more complex models such as Gaussian Process Regression. Even though such studies demonstrate an influx in the precision of the forecasts, this limitation causes the findings to be relevant only to some locations or groups of information. More so, high-value financial decisions are characterized by the role of stakeholder trust, but interpretability is rarely considered at the expense of accuracy in most models. There is still a lack of holistic models presenting both good predictive power and easily interpretable outcomes, even though the most recent contributions offer new features such as streetscape perceptions and Google Trends sentiment features. To provide both global and local explanations, very few studies employ the model-agnostic interpretability approaches such as SHAP and LIME. This gives us the possibility of not only addressing a gap in scholarly literature but also addressing the tangible needs of the market by making the prediction of home prices accurate, scalable, and understandable.
+
+
+This below table represents a consolidated summary of key studies reviewed between 2018 and 2025, outlining their focus, methodologies, datasets, findings, and limitations.
+
+% Chapter 3 - Methodology
+\chapter{Research Methodology}\label{ch:3}
+
+This chapter will review the approach that was employed to analyze and predict UK home prices. To ensure the objective, quantifiable outcome, the research is quantitative in nature with mathematical, statistical, and computational techniques. The second type of data used is the United Kingdom House Price Prediction dataset (2015-2024) on Kaggle that records all transactions of real estate in this country from 2015 to 2024 (Sudulaganti, 2024). Literature review developed the theoretical foundations and methodological guidelines of the study through the representation of the period 2018 2025. In this chapter, the process of collecting, cleaning, preparing the data, performing descriptive statistics, model development, and evaluation of its performance and rendering them simple and to be understood and applied is what will be outlined. Some of the models used were Linear Regression, Random Forest, and Gradient Boosting. RMSE, MAE, and R2 were used to evaluate them. Moreover, there is enhanced interpretability with the help of the combination of SHAP and LIME. Things being equal, such an approach ensures that a study will achieve the goals as rigorously, transparently, and reproducibly as possible.
+
+
+This study utilized the secondary data, which were the UK House Price Prediction dataset (2015-2024) available on Kaggle (Sudulaganti, 2024). The availability of this dataset to carry out predictive modeling is informed by its completeness, wide coverage of the UK, and simplicity. It is a reliable source to identify the trend or to train a particular machine learning model because it has 90,000 data points of property transactions across a decade and 11 columns.
+
+
+The dataset includes all types of data such as street, town, district, county, etc. as well as property characteristics, ownership (freehold or leasehold), date of transaction, and postal address. It is as one reads through these supplementary files that one starts to grasp the breadth of the structural and elements of the Property prices. Minor data preparation was needed including category encodings, date to year and month conversions, and mapping some binary variables since the data had been cleaned and standardized before with Kaggle.
+
+
+The quantitative side of the study, which concerns the properties of the collection, its quantifiable structured data, in particular, requires the application of the computer, statistical, and mathematical methods. The information enhances the predictive analysis in the study which consequently results into more reliability and repeatability of the study.
+
+
+\section{Data Description}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+This table lists the dataset variables along with their descriptions and data types used for housing price prediction.
+
+\begin{table}[htbp]
+\centering
+\caption{Data Description}
+\label{tab:data_description}
+\begin{tabular}{|p{3cm}|p{6cm}|p{3cm}|}
+\hline
+\textbf{Variable} & \textbf{Description} & \textbf{Type} \\
+\hline
+price & Property sale price (in £) & Numeric \\
+\hline
+date & Date of transaction & Date $\rightarrow$ Year/Month \\
+\hline
+postcode & Postal code of the property & Categorical \\
+\hline
+property\_type & Type of property (Detached, Semi-detached, Terraced, Flat, Other) & Categorical \\
+\hline
+new\_build & Whether the property is a new build (Y/N) & Binary \\
+\hline
+freehold & Ownership type (Freehold/Leasehold) & Binary \\
+\hline
+street & Street name & Categorical \\
+\hline
+locality & Local area/neighbourhood & Categorical \\
+\hline
+town & Town or city & Categorical \\
+\hline
+district & District name & Categorical \\
+\hline
+county & County name & Categorical \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{Descriptive Statistics of UK House Price}
+
+This table presents the descriptive statistics of the dataset, including count, mean, and standard deviation for each variable used in the study.
+
+\begin{table}[htbp]
+\centering
+\caption{Descriptive Statistics of UK House Price Dataset}
+\label{tab:descriptive_stats}
+\footnotesize
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+\textbf{Statistic} & \textbf{price (£)} & \textbf{property\_type} & \textbf{new\_build} & \textbf{freehold} & \textbf{year} \\
+\hline
+Count & 90,000 & 90,000 & 90,000 & 90,000 & 90,000 \\
+\hline
+Mean & 325,873.50 & 2.06 & 0.12 & 0.85 & 2019 \\
+\hline
+Std & 1,282,169.40 & 1.63 & 0.32 & 0.35 & 2.56 \\
+\hline
+Min & 100 & 0 & 0 & 0 & 2015 \\
+\hline
+25\% & 160,000.00 & 1 & 0 & 1 & 2017 \\
+\hline
+50\% & 244,995.00 & 2 & 0 & 1 & 2019 \\
+\hline
+75\% & 365,158.50 & 3 & 0 & 1 & 2021 \\
+\hline
+Max & 30,000,000 & 4 & 1 & 1 & 2024 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Descriptive Statistics for Categorical Variables}
+\label{tab:categorical_stats}
+\footnotesize
+\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+\hline
+\textbf{Statistic} & \textbf{postcode} & \textbf{street} & \textbf{town} & \textbf{county} \\
+\hline
+Count & 90,000 & 90,000 & 90,000 & 90,000 \\
+\hline
+Unique Values & 37,603 & 22,218 & 483 & 61 \\
+\hline
+Mean (encoded) & 37,603.30 & 22,218.00 & 483.4 & 60.6 \\
+\hline
+Std (encoded) & 21,686.70 & 12,499.90 & 267.9 & 25.6 \\
+\hline
+Min (encoded) & 0 & 0 & 0 & 0 \\
+\hline
+Max (encoded) & 75,322 & 43,482 & 957 & 116 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+With the help of descriptive statistics, one can visualize how the central trends and variability are distributed among the different variables of the housing dataset. On average, the price of a property is approximately £325,873 with a standard deviation of £1.28 million. This can be attributed to the maximum price, which is £300 million, and the median price of the houses is only £244,950. Such values indicate a severe outlier. Such skewness concentrations indicate that the property values are more with the low and mid ranges. On the contrary, the extremely priced houses bring the average value up. The sample is comprised mostly of semi-detached or terraced dwellings, given that the property\_type variable has a mean of 2.06 with the set boundaries of 0 to 4. On average, the new\_build fraction of houses is approximately 0.12. This value indicates that the majority of the homes are not newly constructed. The mean value of 0.85 indicates that the majority of the homes are freehold as opposed to leasehold. The attributes Postcode, street, locality, town, district, and county add more complexity to the dataset, but also help to increase the variability of the dataset with respect to Europe. An example is the localities, which have a mean of 5066 with high variability, suggesting that the distribution of clusters of houses is not evenly distributed. The year spans from 2015 to 2024, with an average of 2019. This signifies that the dataset contains transactions from almost a decade. 
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/histogram_log.png}
+\caption{\textbf{Histogram showing distribution of house prices in the UK (Log-Transformed).}}
+\label{fig:histogram_log}
+\end{figure}
+
+This figure shows the log-transformed distribution of house prices, highlighting a more normalized spread by reducing the impact of extreme values.
+
+
+Once the price values have been put on a logarithmic scale, this graphic shows how the pricing of housing is distributed. The original graph looks compressed because there are only a handful of expensive homes (those whose values are in the millions of dollars), so the log scale would be used. There is a bell-shaped curve in the middle as most homes lie within the typical range of prices. The peak illustrates that in the UK property market, the maximum sales include the properties that are occurring around and near the average price, and a few are at the extreme at the two ends of the price. The greater part of the houses is in the low-to-mid-range price range, with some of the houses in the very high end, as reflected in this graph.
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/histogram_filtered.png}
+\caption{\textbf{Histogram showing distribution of house prices in the UK (Filtered for < £2 Million).}}
+\label{fig:histogram_filtered}
+\end{figure}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+
+This figure shows the frequency distribution of UK house prices filtered below £2 million, providing a clearer view of the typical price range by excluding extreme outliers.
+
+
+If we constrain our analysis to the houses with values under £2 million, then the following chart is the result of the distribution. This filter removes the effect of truly affluent mansions, which distort the averages in general. The plot indicates that the majority of the residences are within the range of 150,000 to 200,000, and the highest peak of the bars is as well. The proportion of properties with a value of or more than the price offered for sale is sold, and the number of sales decreases markedly as the price exceeds that value of 200,000. This up-and-down bar pattern, as opposed to the foregoing distorted bar pattern, is more revealing of the actual distribution of UK housing values. The given view is more applicable to understanding real-life dynamics in the housing market because it is argued that inexpensive and mid-range properties prevail in the market.
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/boxplot_property.png}
+\caption{\textbf{Boxplot showing house prices by property type.}}
+\label{fig:boxplot_property}
+\end{figure}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+
+\textbf{}
+
+
+This figure presents a boxplot of house prices grouped by property type, showing variation in prices and highlighting the presence of outliers.
+
+The boxplot, which uses encoded form (0 to 4, i.e., Detached, Other, Flat, Terraced, and Semi-Detached), indicates the range in which the prices of homes in different categories are located. Although the bulk of the real estate transactions are in a rather narrow price range, the graph indicates that there are many outliers, particularly in the latter type of properties, the values on which may reach as much as 300m pounds. This provides evidence to the above conclusion that the ultra-luxury houses lead to a highly skewed dataset.
+
+The distribution indicates that inference type is a significant factor having an influence on price, whereby some types are more extreme and have a higher range and variability than the other types. As type 2 of property dominates the dataset in terms of volume and the extreme price range, such an approach is permissible. This could imply that popular categories of such problems as semi-detached or terraced houses, belong to it.
+
+What we come to understand is that the type of property is an important variable in home pricing models but, given that not only do we have a handful of very expensive transactions, but some of them also are extreme outliers, we might have to apply techniques such as log transformation or even robust regression to come up with better smoother predictions and reduce the influence of that few, extreme transactions.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/price_trend.png}
+\caption{\textbf{Line chart for average house price over years (2015-2024).}}
+\label{fig:price_trend}
+\end{figure}
+
+\textbf{}
+
+
+This line chart shows the trend of average house prices over the years 2015 to 2024, highlighting overall growth with short-term fluctuations.
+
+This graph represents how prices of homes in the UK have been moving over the past 10 years, from 2015 to 2024. In 2015, when the period started, the average house price was about 260,000. Prices increased steadily until they drastically increased to nearly 338,000 in the year 2017. However, the price market experienced a small decline in 2019 as the average price approached the level of £300,000, after this rise. Since 2020, there has been increasing demand, and this was likely caused by demand after the pandemic, low mortgage interest rates, and heightened mortgage activities within the property landscape. The year that was the most intense in terms of this growth was 2022, with the prices of houses averaging almost 370,000 pounds, which is a record high of those values presented in the data. The price then started to decline, and in 2023 and 2024 reached the levels of £ 330,000- £ 350,000. The variety of variability, especially in the years 2017 and 2022, was exceptionally wide, suggesting that those years are volatile. The most important thing to remember is that UK home prices have been appreciating over time, but subject to correctional patterns in response to forces such as the economy, demand and supply, and other externalities such as the pandemic.
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/seasonal_trend.png}
+\caption{\textbf{Line chart for average house price by month based on seasonality 2015 to 2024.}}
+\label{fig:seasonal_trend}
+\end{figure}
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+
+This figure represents the seasonal variation of house prices across months, highlighting fluctuations in average property values and illustrating potential seasonal trends within the UK housing market.
+
+
+This line chart illustrates how the value of homes fluctuates month by month according to season. Home prices are generally unable to go beyond a close margin of the values between £300,000 and 340,000; however, fluctuations have been noted in certain months of an increase. To illustrate, the average price in October rises to 400,000-350,000, with the highest change being in August and June. Conversely, it is common to find that May and November experience small declines, which could be a pointer to lesser activity within the pricing.
+
+
+The average prices are higher, and the spread of the property prices sold increases more in peak months such as June and October, since the shaded area displays some randomness. What we can infer, based on this, is that in a given year, the housing market has a type of seasonal trend in that some months are consistently higher, in terms of transaction prices. It may be due to rising or falling mortgage approval times, seasonal patterns of buyers, or cycles of demand in the market, etc. Policymakers and investors need a clear understanding of this trend in order to make sound decisions regarding when to undertake sales, investments, and implement the housing policy, among others.
+
+
+The dataset was prepared to be used in predictive modeling, and feature engineering and preprocessing were utilized. First, the lack of values was explored and dealt with to preserve integrity in the dataset. The outliers in distribution analysis, especially the values of price, were transformed using a logarithmic scale, therefore reducing skewness. The category variables, such as property type, ownership status (freehold/ leasehold), and locality, were coded numerically so that a machine could read them. The transaction date was split year and month-wise to be able to capture seasonal and time patterns.
+
+The feature engineering was examined to enhance the models through price per square foot (when area data is given) and location-based aggregations. High-cardinality features such as street and postcode were combined or excluded in order to prevent overfitting. Lastly, scaling made feature ranges equivalent, improving Linear Regression performance to be improved.
+
+
+\section{Machine Learning Models}
+
+\subsection{Linear Regression}
+
+Linear Regression is a supervised learning algorithm that models the relationship between a dependent variable (house price) and one or more independent variables (features) (Wu, 2022). It assumes a linear relationship represented as:
+
+\[
+y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \ldots + \beta_nx_n + \varepsilon
+\]
+
+Where y is the predicted value, $\beta_0$ is the intercept, $\beta_1 \ldots \beta_n$ are the coefficients, $x_i$ are input features, and $\varepsilon$ is the error term. The model minimizes the sum of squared errors (Ordinary Least Squares) to achieve the best fit.
+
+\subsection{Random Forest Regression}
+
+Random Forest is an ensemble learning algorithm that builds multiple decision trees and aggregates their predictions. Each tree is trained on a bootstrapped subset of data, and features are randomly selected at each split to reduce correlation (Salman \emph{et al.}, 2024). The final prediction is the average of individual trees' outputs:
+
+\[
+\hat{y} = \frac{1}{T} \sum_{t} f_t(x)
+\]
+
+Where T is the number of trees, and $f_t(x)$ is the prediction of the t-th tree. Random Forest improves accuracy and reduces overfitting compared to a single decision tree.
+
+\subsection{Gradient Boosting Regression}
+
+Gradient Boosting is an ensemble technique that builds models sequentially, where each new model corrects the errors of the previous one \cite{konstantinov2021}. It minimizes a loss function (e.g., Mean Squared Error) by adding weak learners (decision trees):
+
+\[
+F_m(x) = F_{m-1}(x) + \eta h_m(x)
+\]
+
+Where $F_m(x)$ is the boosted model, $h_m(x)$ is the weak learner, and $\eta$ is the learning rate. Gradient Boosting achieves high accuracy but may require careful tuning to avoid overfitting.
+
+Evaluating the effectiveness and accuracy of the algorithm models in predictive modeling is important. The metrics of the regression model in the research include Mean Absolute Error, Root Mean Squared Error, and Coefficient of Determination. This model performance metrics helps in diverse ways to understand the result of the models. RMSE and MAE show the value of the mistakes, while $R^2$ describes how much the model can account for a dependent variable \cite{chugh2020}. In such a way together, they measure the completeness and the reliability of the model to the predictions at a sufficient level.
+
+\subsection{Root Mean Squared Error (RMSE)}
+
+The Root Mean Squared Error (RMSE) can be commonly found when doing Regression tasks. The mean squared discrepancy between the predicted and actual values is obtained by squaring, then averaging the square root \cite{chugh2020}. Since the outliers are punished to a larger extent, it is more vulnerable to errors.
+
+Mathematical formula:
+\[
+RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
+\]
+
+Where:
+\begin{align*}
+n &= \text{number of observations} \\
+y_i &= \text{actual value} \\
+\hat{y}_i &= \text{predicted value}
+\end{align*}
+
+A lower RMSE indicates that the model is performing well, with predictions close to the actual values.
+
+\subsection{Mean Absolute Error (MAE)}
+
+The Mean Absolute Error (MAE) describes the size of average prediction error of a regression model. It is less sensitive to outliers than RMSE because differences are taken as absolute values and all the faults get equal consideration (Chugh, 2020).
+
+Mathematical formula:
+\[
+MAE = \frac{1}{n} \sum |y_i - \hat{y}_i|
+\]
+
+where:
+
+n = number of observations\\
+$y_i$ = actual value\\
+$\hat{y}_i$ = predicted value
+
+A smaller MAE indicates better model accuracy. MAE is useful when the importance of error magnitude needs to be considered equally across all data points.
+
+\subsection{Coefficient of Determination ($R^2$)}
+
+Coefficient of Determination, denoted as $R^2$ is a statistic that explains the proportion of changes in a dependent variable that can be attributed to the independent variables in the model. It is a relative measure using a value of zero to one \cite{chugh2020}.
+
+Mathematical formula:
+\[
+R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}
+\]
+
+Where:
+\begin{align*}
+y_i &= \text{actual value} \\
+\hat{y}_i &= \text{predicted value} \\
+\bar{y} &= \text{mean of actual values}
+\end{align*}
+
+Having a high value of $R^2$ will indicate that the model explains the variation in the target variable satisfactorily, and conversely, a low value will reveal that the model fails in explaining the variation. In contrast, $R^2$ does not provide any information regarding prediction accuracy and bias.
+
+When employed together, RMSE, MAE, and $R^2$ constitute a powerful system on which to base an evaluation of regression models. The mean absolute error (MAE) gives a more detailed view of the average mistakes, root-mean-squared error (RMSE) points out large errors, and $R^2$ measures by which much of the variance of the dependent variable is explained as a result of the independent variables. When these indicators are combined, the prediction and reliability of the models utilized in this paper can be well comprehended.
+
+\subsection{Interpretability or Explainability techniques: SHAP and LIME }
+
+The black box of predictions, which is considered in modern machine learning models, particularly an ensemble or neural network, is often a complex structure. Stakeholders should be aware of how predictions are formulated as a means of assuring them of assurances, justice, and accountability, even when models can come up with highly accurate predictions. New interpretable methods such as Shapley Additive explanations (SHAP) and Local Interpretable Model-Agnostic explanations (LIME) have been introduced to address this complexity \cite{fa2022}. Presenting all these methods as the bridge between precision and openness, researchers and practitioners can comprehend how models behave globally and locally.
+
+Shapley Additive explanations (SHAP) is a consolidated approach that relies on the association of significance values to features to explain individual predictions; it is rooted in cooperative game theory. It applies the concept of Shapley values in game theory, which holds that each characteristic can be thought of as a ``player'' in the prediction process \cite{fa2022}.
+
+Mathematical formulation:
+\[
+\phi_i = \sum_{S \subseteq M \setminus \{i\}} \frac{|S|! \cdot (M - |S| - 1)!}{M!} \cdot [f(S \cup \{i\}) - f(S)]
+\]
+
+Where:
+\begin{align*}
+\phi_i &= \text{Shapley value for feature } i \\
+M &= \text{total number of features} \\
+S &= \text{subset of all features excluding } i \\
+f(S) &= \text{model prediction using subset } S
+\end{align*}
+
+Over all potential permutations, the average marginal contribution of feature $i$ is represented by the Shapley value $\phi_i$. The major advantages of SHAP are global interpretability, local correctness, and consistency. As an example, the contribution of a given factor, such as size, location, and property type, may be shown by the SHAP in regard to predicting home prices.
+
+Local Interpretable Model-Agnostic explanations (LIME) uses simpler, more interpretable models such as decision trees or linear regression to locally approximate the complex model, thereby providing an explanation of a prediction. To enable it to learn the local decision boundary, it perturbs the input data around a particular instance, observing how the predictions derived by the model vary, and then fits a simpler model \cite{fa2022}.
+
+Mathematical formulation:
+\[
+\text{Explanation}(x) = \arg\min_{g \in G} L(f, g, \pi_x) + \Omega(g)
+\]
+
+Where:
+\begin{align*}
+x &= \text{instance to explain} \\
+f &= \text{original complex model} \\
+g &= \text{interpretable surrogate model from class } G \\
+L &= \text{loss function measuring fidelity between } g \text{ and } f \\
+\pi_x &= \text{locality measure, ensuring focus around instance } x \\
+\Omega(g) &= \text{complexity penalty for the surrogate model}
+\end{align*}
+
+Using LIME, it is possible to understand what features caused some prediction to be made. As an example, it may demonstrate to the users the factors, namely the location and the number of bedrooms, which were key determinants of the anticipated price of a particular property.
+
+\subsection*{Comparison}
+
+Shapley additive explanations (SHAP) and Local interpretable model-agnostic explanations (LIME) have different methods, but lead to the simplicity of model usage. However, despite being computationally SHAP will ensure a constant degree of global and local feature significance and relies on game theory. The LIME can be different depending on sample tactics; however, it is fast and gives a straightforward local explanation. The opinions complement each other: SHAP ensures that explanations are consistent across the entire dataset on an aggregate level, whereas LIME gives local explanations of individual predictions that they can easily understand (Fa, 2022).
+
+
+In this paper, SHAP and LIME were used to examine the house price prediction models. This enables stakeholders to not only understand the accuracy of the models but also the reasons behind the results of the models. As a result of this, confidence is boosted, decision-making is easy, and machine learning algorithms are made more applicable and ethical in real estate markets.
+
+
+This chapter has given a description of the methodology employed in carrying out the research to predict house prices in the UK. This thesis utilized a quantitative methodology as well as secondary data sets derived from Kaggle's UK House Price Prediction data (2015-2024). In data building the dataset, the primary activities involved data collection, cleansing, incremental saving, descriptive statistics application, and model feature engineering in preparation for building the model. The comparison of Linear Regression, Random Forest, and Gradient Boosting supervised regression algorithms was reliable through the application of RMSE, MAE, and cross-test evaluation. The SHAP and LIME frameworks advanced model prediction reasoning, as their techniques enabled more informed decision-making by improving transparency for model-accurate local and global understanding of the predictions. The approach in predicting various data points and estimating their relevance and possible reasoning, shed light better-balanced approach in maximized interpretability, prediction and their respective robustness and repeatability. This chapter's study and results lay the foundation for the exploration of model predictive potential in Chapter 4.
+
+
+% Chapter 4 - Results and Findings
+\chapter{Results and Findings}\label{ch:4}
+
+In this chapter, results and findings when implementing the proposed approaches to predict UK home prices are provided. This part attempts to present the findings of data preparation, methodology discussed in Chapter 3, as well as exploratory data analysis (EDA), implementation, and assessment. Some of the notable trends, patterns, and correlations that had been revealed by EDA were the following: dispersion of the data; property types fluctuation; seasonality; and yearly price movements. This result forms the basis of the understanding of the larger context of the dynamics of the property market. Following the EDA, linear regression, random forest, and gradient boosting (multiple supervised regression) were implemented and tested with appropriate metrics that included RMSE, MAE, and R$^2$. To make things simpler to understand, we applied techniques of interpretability, such as SHAP and LIME, to explain the global and local predictions of the models. The results of the research discussed in this chapter allow us to conclude that diverse models can be used to predict the results or outcomes, as well as that the outcomes can be understood relatively easily, ensuring that the outcomes can be used by stakeholders with and without technical background knowledge. Collectively, these results indicate the extent to which machine learning performs when used to predict home prices.
+
+\textbf{}
+
+
+\textbf{}
+
+
+
+\begin{table}[htbp]
+\centering
+\caption{Linear Regression Results}
+\label{tab:linear_regression_results}
+\begin{tabular}{|p{4cm}|p{4cm}|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+RMSE & 581,571.41 \\
+\hline
+MAE & 160,781.29 \\
+\hline
+$R^2$ & 0.0582 \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\textbf{}
+
+
+\textbf{}
+
+
+
+The predicted accuracy and the overall performance of the Linear Regression model of UK home price estimation are reflected in this table, and assessment criteria such as RMSE, MAE, and R$^2$ are included in this table.
+The UK home prices are inadequately portrayed by the Linear Regression model. The model's home prices' Root Mean Square Error (RMSE) of £581,571 represents a significant disconnect. The simplified measurement of forecast error, the Mean Absolute Error (MAE), shows that £160,781, indicating there is a significant amount of discrepancy in the price prediction model's house price variations captures. More telling is the model's R² score of 0.0582, which shows that the model encompasses merely 5.8\% of the home price volatility. The model has a hard time explaining a great deal suggests that the dataset in question is extremely intricate, and interwoven with many interactions and nonlinear relationships between predictor and target variable, among other things. This illustrates that the task of forecasting residential housing prices is a multidimensional problem with nonlinear complexities. Additional computing power has to be deployed to more sophisticated regression techniques, or other more complex tree-based regression models such as Random Forest or Gradient Boosting, to the issue at hand.
+
+
+\begin{table}[htbp]
+\centering
+\caption{Random Forest Results}
+\label{tab:random_forest_results}
+\begin{tabular}{|p{4cm}|p{4cm}|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+RMSE & 862,856.69 \\
+\hline
+MAE & 146,250.94 \\
+\hline
+$R^2$ & -1.0732 \\
+\hline
+\end{tabular}
+\end{table}
+
+The predicted accuracy and the overall performance of the Random Forest model of UK home price estimation are reflected in this table, and assessment criteria such as RMSE, MAE, and R$^2$ are included in this table.
+With this dataset, the Random Forest Regression was very bad at predicting the values of homes. The Root Mean Squared Error (RMSE) value of £862,856.69 is much lower than that of the Linear Regression model. Predictions are less reliable for real-world applications as the average difference between predictions and actual selling prices is very large, as shown by the Mean Absolute Error (MAE) of £146,250.94. The worst finding is the R² value of -1.0732. If the R² value is less than zero, it means that the model has not captured any useful variation in the dataset, and in this case, it performs worse than a simple mean-based guess at predicting the target variable, which is the model's ultimate focus.
+
+There might be a number of reasons that explain this unsatisfactory outcome. To begin with, Random Forest, even with the encoding applied, might have struggled with the complex categorical variables in the dataset (postcode, location, and property type). Also, the data after preprocessing might have been highly sparse and high-dimensional, which ought to result in overfitting during training and poor generalization in testing. Finally, the data used does not include relevant external macroeconomic and geographic variables usually involved in predicting the price of homes, such as the supply and demand, income, and local facilities available. These results make it clear that Random Forest isn't doing the job and that other methods or feature engineering are needed.
+
+
+\begin{table}[htbp]
+\centering
+\caption{Gradient Boosting Results}
+\label{tab:gradient_boosting_results}
+\begin{tabular}{|p{4cm}|p{4cm}|}
+\hline
+\textbf{Metric} & \textbf{Value} \\
+\hline
+RMSE & 1,310,523.86 \\
+\hline
+MAE & 154,374.42 \\
+\hline
+$R^2$ & -3.7824 \\
+\hline
+\end{tabular}
+\end{table}
+
+The predicted accuracy and the overall performance of the Gradient Boosting model of UK home price estimation are reflected in this table, and assessment criteria such as RMSE, MAE, and R$^2$ are included in this table.
+There are multiple barriers to understanding the relationships between various attributes and the associated home prices predicted by the Gradient Boosting model performance on the housing dataset. The predicted values of the model stand in sharp contrast to the actual housing prices, as evidenced by the RMSE, which sits at around 1.31 million. The dataset as a whole reflects systemic errors in prediction, as evidenced by the Mean Absolute Error (MAE), which shows a value of around 154,374. More concerning is the fact that the model, as evidenced by the negative value -3.78, R-squared value, allocates more predictive power than a simplistic baseline that predicts the house price of all occurrences to be the mean house price.
+There are multiple explanations for the poor performance the model exhibits. When one deals with hyperparameters such as the learning rate, maximum depth of the tree, and the number of estimators, Gradient Boosting is highly reactive. The aforementioned complex dataset may also suffer from the oversimplified conditions of the default rules that are applied. In addition to this, the dataset may be improperly encoded with numerical and categorical variables, causing the model to make inefficient splits in the boosting trees. Also, the model may have suffered from poorly constructed training that contained properties such as outlier values or highly skewed, unbalanced distributions. In the end, the results indicate that for the model to perform satisfactory prediction accuracy, the model is able to, obsolete feature engineering, excessive hyperparameter changes, and controlling outliers are needed.
+
+
+\begin{table}[htbp]
+\centering
+\caption{Comparison of Models}
+\label{tab:model_comparison_detailed}
+\begin{tabular}{|p{3cm}|p{3cm}|p{3cm}|p{3cm}|}
+\hline
+\textbf{Model} & \textbf{RMSE} & \textbf{MAE} & \textbf{$R^2$} \\
+\hline
+Linear Regression & 581,571.41 & 160,781.29 & 0.058 \\
+\hline
+Random Forest & 862,856.69 & 146,250.94 & -1.073 \\
+\hline
+Gradient Boosting & 1,310,523.86 & 154,374.42 & -3.782 \\
+\hline
+\end{tabular}
+\end{table}
+
+In order to demonstrate their relative forecasting capability on the UK house price data, this table compares the regression models (Linear Regression, Random Forest, and Gradient Boosting) based on RMSE, MAE, and R$^2$.
+
+
+•	Although Linear Regression yielded the best RMSE (581k), Linear Regression shows almost no explanatory power on home price variation, with an R-squared value of 0.058. 
+
+
+•	Although Random Forest does better than a horizontal mean predictor concerning MAE (146k), it performs poorly with an R-squared value of -1.073.
+
+
+•	With an RMSE of 1.31 million and a R-squared value of -3.782, Gradient Boosting exhibited a remarkable lack of demonstrable generalizability.
+
+
+It is also possible that the dataset’s preprocessing and feature engineering favored linear patterns over more complex non-linear boundaries, and Linear Regression, due to its simplicity, outperformed the ensemble models. The ensemble models did not perform well, and as can be seen, the results have a skew in them, with many outliers; Linear Regression is the least performance-deprived model, however.
+
+
+\section{Interpretability of Model Predictions: SHAP and LIME}
+
+This below SHAP summary figure illustrates the global interpretability of the Gradient Boosting model because it reveals how a number of characteristics affected home price projections.
+
+\textbf{}
+
+
+\textbf{}
+
+\vspace{2cm}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/shap_gradient_boosting.png}
+\caption{\textbf{SHAP Summary Plot for Gradient Boosting Model.}}
+\label{fig:shap_gradient_boosting}
+\end{figure}
+
+Each data point SHAP value is indicated by a dot, and the x-axis reflects the strength and direction of the impact of the feature on the model output. As the feature value is low, the color gradient changes successively between blue and red. As one can see in the figure, cat\_property\_type\_label\_Terraced and cat\_property\_type\_label\_Detached are the most significant factor that affects home values. A property with a high property type value (i.e., detached or semi-detached) has more optimistic predictions, whereas properties with low property type values (i.e., flats) have pessimistic predictions. The importance of geographical and socio-economic environment to house prices is indicated by the fact that the county, district, and locality took a leading role. An example is that some counties and districts will be much lower in the forecasted costs, compared to others. Other criteria, including town, freehold status, year, and postcode, have fewer values, but their influence is still present. Regarding the impact of the various features on the model predictions, both street and month, and the num\_new\_build or cat\_property\_type\_label\_Semi-Detached factor do not seem to make much contribution. By all accounts, the SHAP results confirm what can be expected of real property markets by demonstrating that the GBM-model predictions are largely influenced by property type and geographical location.
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/lime_gradient_boosting.png}
+\caption{\textbf{LIME Local Explanation for Gradient Boosting Model.}}
+\label{fig:lime_gradient_boosting}
+\end{figure}
+
+The LIME study is a good resource to comprehend the features used by the ‘Gradient Boosting’ model to determine a certain home price. Each feature is assessed in the graphic by its positive (orange) and negative (blue) impact on the anticipated value. When a price is compared to the model’s baseline, we can decipher the reasons for the price to change. The analysis indicates that the property characteristics, including cat\_property\_type\_label\_Terraced, Detached, and Flat, were important ones. For instance, the existence of the Terraced property category suppressed the value by a great deal, which indicates that terraced properties were valued lower than the other categories. Detached properties, on the other hand, are also usually sold at higher prices; thus, the attribute ‘detached’ as a property type also was able to uplift the projection.
+
+
+Beyond the town and the county, the postal code and the district served as important geographical delineations. For instance, the prediction was more accurate for greater postcode values or for locations within certain districts, whereas it was less accurate for other locality attributes. Such facts corroborate the influence that location has on property values. The year and month as temporal variables seemed to support the idea of seasonality or some variation from one year to another, and these differences were small but noticeable. In the same way, the street and the freehold possession were of low status concerning ownership and construction differences but were low.
+The LIME study has shown that the location and property type data are very important for the construction of the Gradient Boosting model. The different classes of property types have the greatest directional influence. In doing this, we are able to check that the model is interpretable and that the predictions we make align with market expectations.
+
+
+
+\textbf{}
+
+\textbf{}
+
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/shap_linear_regression.png}
+\caption{\textbf{SHAP Summary Plot for Linear Regression Model.}}
+\label{fig:shap_linear_regression}
+\end{figure}
+
+\textbf{}
+
+
+This SHAP summary graph of the Linear Regression model, which indicates the influence of various factors on home price prediction in the UK in descending order of importance.
+
+
+To get a better idea about how the Linear Regression model makes predictions of UK home prices, this SHAP summary map traces the relative contribution of each of the factors. Each dot is a SHAP value that measures the effect of one characteristic on a single prediction. Red-blue scale (low value red, high value blue) and x-axis indicate the size of the characteristic, whereas the y-axis indicates whether the characteristic increases or decreases the expected value. Of all the variables that impact home price forecasts, num\_property\_type has the greatest relationship. The higher property types (like the detached houses) improve the estimated value, and the lower property types reduce the estimated value. The rationale behind this is the fact that various types of property (e.g., flats, terraced, semi-detached, detached) play an important role in terms of pricing. Another important factor is the property status as freehold or leasehold, in that freehold property is valued more than leasehold. The geographical indication of year, district, and county, as well as the town, were the minor contributing factors that would have been expected to determine the home prices to be determined. While the linear model was able to pick up the effects of new\_build, postcode, street, month, and locale, more complex models better reflected such effects. The reason for this is that the linear model reveals that these variables have less significance. This graph makes it obvious that the relevant predictors of the Linear Regression model are the type of property, the ownership (freehold), and the characteristics of the areas.
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/lime_linear_regression.png}
+\caption{\textbf{LIME Local Explanation for Linear Regression Model.}}
+\label{fig:lime_linear_regression}
+\end{figure}
+
+Using a Linear Regression model, the prediction outcome for a given house price instance was explained using LIME. The right-hand side figure ranks the characteristics based on the individual contribution; orange bars indicate a positive contribution (i.e., raising the expected price), whereas blue bars indicate a negative contribution (i.e., lowering the expected price).
+
+
+In this instance, the leading factors were cat property type label detached, num\_year = 2023, num\_town = 17, and num\_district = 315. The assumptions made in this case, being, the house is a detached home, the data reflects the most current year, and the house is in a large town or city, indicate a higher price. The property market generally has a favorable opinion towards a home that is modern, has a good amount of space, and is a detached home due to demand, space, and the infrastructure surrounding it.
+
+
+Nonetheless, attributes like cat\_property\_type\_label\_Other, cat\_property\_type\_label\_Semi-Detached, and cat\_property\_type\_label\_Terraced created a negative impact. These kinds of properties are aligned with the existing real estate market conditions, owing to the fact that these types of houses are often the most affordable options available in the market. What stands out in this instance is the fact that structural attributes and the sale year had a stronger explanatory power in this model relative to postcode and location.
+Overall, the LIME explanation sheds additional light on the rationale behind the selection made by the Linear Regression, and it shows the importance of timing and the physical characteristics of a real estate as the dominant factors, while the geo-spatial representation is of secondary importance.
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/shap_random_forest.png}
+\caption{\textbf{SHAP Summary Plot for Random Forest Model.}}
+\label{fig:shap_random_forest}
+\end{figure}
+
+
+
+This SHAP summary graph of the Random Forest model indicates the influence of various factors on home price prediction in the UK in descending order of importance.
+
+
+The Random Forest model's SHAP summary plot provides an overview of how different features affect predicted home prices. The model gives utmost attention to such features as property type (especially terraced dwellings), locality, and county, among other features. The prices can be shifted greatly by changing such features, as the SHAP values of such features suggest a significant and wide-ranging impact on predictions. On the other hand, year, postcode, district, and town, among other features, illustrate a lower value. They affect the predictions, but not as strongly as the most important features. The property classification greatly contributes to pricing, and the property type categorical encodings common to the types of flats, detached, and semi-detached homes also contribute. The SHAP values characteristic of new build status, month, and freehold are positively correlated to the prediction error margin, which means they lack predictive power. Random Forest model does take into account such property attributes as property type, geo spacing, and locality, which are in keeping with what should be expected in the real world.
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/lime_random_forest.png}
+\caption{\textbf{LIME Local Explanation for Random Forest Model.}}
+\label{fig:lime_random_forest}
+\end{figure}
+
+
+\textbf{}
+
+
+To get deeper insight into how some variables influence local predictions, the LIME analysis on the Random Forest model comes in handy. As seen in the image, one of the largest positive contributors to the estimated house price is the property type (Terraced). This significantly increases the overall evaluation of the property. There is a strong influence of types of properties on the predictions; however, being classified as Detached minimizes that influence. Crucial are year, county, postcode, and street. Predictions are influenced by time and space, for instance, the county (54) and year (2022) highly. In this case, postcode, street and district identifiers are thought to have worsened the state of affairs. This can be used to mean that the model is skeptical of the location or type of certain places. In this case, LIME shows the fact that different attributes possess different levels of influence. The location and the kind of the property are the two most important factors when speculating with the real estate.
+
+
+This thesis identifies some crucial findings on the application of machine learning algorithms to home prices. Linear Regression was the nearest to the actual values in the house price dataset (actual variation), although with a low R2 of 0.058, with the RMSE of approximately 581,571, an MAE of 160,781 and a positive R2 value. Neither the Random Forest nor the Gradient Boosting models appeared on the dataset accurately since their root-mean-squared errors (RMSE) of such large sizes (£862,857 and £1,310,524, respectively) were much bigger. These models performed the worst when it came to the variables provided. The explainability results of SHAP showed that the most important predictors were the year, nature of the property, and county of origin. An additional detailed analysis of each predictor and how it may influence price forecasts was conducted through LIME analysis. In addressing skewness and outliers, the entire finding of the study was that classical regression models performed well in ensemble techniques.
+
+
+% Chapter 5 - Conclusion and Recommendations
+\chapter{Conclusion and Recommendations}\label{ch:5}
+
+This study attempted to explore the use of a machine learning model to accurately predict house prices in the UK. We have applied performance measures such as RMSE, MAE, and R-squared to compare three supervised regression models: Linear Regression, Random Forest, and Gradient Boosting. To achieve a better understanding and integrate the explainability of the model predictions, the SHAP and LIME were applied to determine the global and local significance of features.
+
+
+The results of the linear regression showed the most consistency with an R-squared of 0.058, RMSE of £581,571, and MAE of £160,781. This indicates that, unlike the ensemble models, the Linear Regression model, even though it is to a small extent, captures some variation in home price values. Neither Random Forest nor Gradient Boosting approaches were able to do better than guessing the mean, since both models produced R-squared values which were negative (R-squared = -1.073, RMSE = £862,857, MAE = £146,251) and R-squared = -3.782, RMSE = £1,310,524, MAE = £154,374) respectively. These are the results which confirm that in the presence of outliers and heavily skewed distributions, ensemble techniques tend to perform worse than linear regression.
+
+
+As expected in the real world, such data revealed that the county, district, and property type were used most often in the SHAP global explanations to determine a property value, as depicted by the real-world prediction. Local LIME explanations confirmed that year, fresh build status, and month were significant factors affecting individual forecasts, and these could be used to gain an instance-specific view. Besides demonstrating that vital features are decisive, another feature of SHAP and LIME was the ability to make complex practices much readable by humans.
+
+
+ A number of conclusions can be drawn with regard to these observations. The nature of the data set caused the ensemble methods to perform poorly, despite their ability to generally handle the non-linearity of interaction well. Second, although it is easy, Linear Regression was more consistent in forecasting. There is a possibility of data engineering faults and this suggests that in some realistic scenarios, even older models may work better than modern ones. Furthermore, thirdly, in the housing domain in which many different stakeholders, investors, and regulators need to maintain high-level transparency, it is necessary for the transparency engineering of the models to understand how explainable a model is and how it is used to build confidence in its predictive systems.
+
+ 
+This thesis demonstrates how simple regressions and modern explainability tools can be used to learn more about the housing market. The Ensemble model performance improvements should be in the future be on outlier management, data cleaning and feature engineering. A reliable home prediction system has to balance between fair prediction with stable interpretation, and this is where the current research topic will express that there is a necessity.
+
+
+This thesis had several important points concerning the application of machine learning to the prediction of real estate values. The study indicates that home values are greatly influenced by factors such as ownership, type of property and some geographical features such as district, county and location. The addition of SHAP and LIME to the models led to the models becoming more concise, emphasizing the factors that were of the most significance to the results, and were closer to the real-life decisions. Explainable AI is a necessity when it comes to practical applications where transparency is a welcomed feature.
+
+
+However, there were also clear limitations that were demonstrated by the results. The chosen features were inadequate to capture the complexity of housing price changes, as it is demonstrated by the poor performance of Linear Regression, Random Forest, and Gradient Boosting, which had high RMSE and poor R$^2$. Even though the number of transactions in the dataset was great, it was lacking in significant outside variables that influence real estate markets, including interest rates, household income, and employment statistics. Noisy data and extreme outliers within certain difficult areas of data further reduced the reliability of the predictions. Random Forest and Gradient Boosting struggled equally with overfitting due to feature sets lacking sufficient detail. These outcomes suggest researchers would benefit by incorporating additional relevant features and targeted advanced feature engineering into the next iteration of their modeling.
+
+
+\subsection*{Data Quality and Preprocessing}
+
+The dataset outliers and unbalanced distributions were also problematic for the performance of Random Forest and Gradient Boosting models. Consequently, the focus of future work should be on outlier attenuation, normalization, and minimization of feature scaling. The interest rates, mortgage rules, and their socioeconomic data, as well as others, can be incorporated to improve the model.
+
+\subsection*{Feature Engineering}
+
+The research found property type, county, and district to be very significant in forecasts. Some more accurate location-based factors, like surrounding facilities, access to transportation, as well as crime rates, would be desirable to add. The model can also be made more powerful in terms of its predictive performance by calculating factors like square footage pricing, the age of the property, as well as energy efficiency rating.
+
+\subsection*{Model Selection and Optimization}
+
+Linear Regression was showing the most consistency, but it was not explaining a large portion of the variation. A hybrid approach may be able to combine both regression and machine learning, hyperparameter optimization, and cross-validation to improve ensemble methods. It would also be quite viable to explore more sophisticated algorithms by looking at XGBoost, CatBoost, or neural networks.
+
+\subsection*{Interpretability and Transparency}
+
+It was so much easier to identify key causes of house prices given such explainability tools as SHAP and LIME. To provide responsible stakeholders, investors, or policymakers with confidence to make their decisions through data, future work is to include the local and global interpretability dashboard.
+
+\subsection*{Practical Application}
+These findings have implications on the planning of cities and affordable housing programs. The investors will find risk management and property valuation models useful. The housing industry can be more confident about data-driven decisions since it can foresee the future.
+
+% Chapter 6 - Future Work
+\chapter{Future Work}\label{ch:6}
+
+The potential applications of this thesis in the future include the enlightenment of machine learning algorithms in the process of home price prediction, among others. Some of the more significant pieces of geographical and structural information such as type of building, county, district, and ownership were included in the information. These characteristics are not enough in themselves, although they do contribute to the understanding of the real estate market. It is possible to study different macro and micro-socioeconomic factors in future such as interest rates, housing policies, income levels, population, and employment rates. The factors can help illuminate what actually determines home values.
+
+
+All three of the used models Linear Regression, Random Forest, and Gradient Boosting performed badly in their predictions because of outliers and asymmetric distributions. The study is supposed to use more suitable algorithms, including neural networks, XGBoost, CatBoost, LightGBM, and additional ML and deep learning algorithms, in future studies to resolve the relational complexity and non-linearity of the problem. Additionally, precision could be improved with the help of feature engineering and effective outlier detection methods. An example that could be given is location grouping with clustering or price per square foot calculations.
+
+
+Third, it is essential to keep in mind the concentration on model interpretability. Better reporting to politicians, investors, and the general population could be realized by the extension of SHAP and LIME to interactive visualization dashboards or the application of emerging explainable AI solutions. Finally, it may be helpful to test the real-time prediction systems and expand the scope of time. New models can probably track developments in the housing market more effectively and make rapid decisions in case they use streaming data or receive updates more frequently. To establish an effective and credible model of home price prediction, future research needs to work on improved data integration, improved modeling, improved feature engineering, and improved interpretability measurements.
+
+
+\renewcommand{\bibname}{References}
+\begin{thebibliography}{999}
+\addcontentsline{toc}{chapter}{References}
+
+\bibitem{azam2025}
+Azam, M.A., Rai, S. and Raza, M.S., 2025. Predictive analytics for housing market trends and valuation. \emph{Management:(Montevideo)}, (3), p.3.
+
+\bibitem{chugh2020}
+Chugh, A., 2020. MAE, MSE, RMSE, Coefficient of Determination, Adjusted R Squared Which Metric is Better?. [Online] Available at: 
+\href{https://medium.com/analytics-vidhya/mae-mse-rmse-coefficient-of-determination-adjusted-r-squared-which-metric-is-better-cd0326a5697e}{Medium Analytics Vidhya}
+
+\bibitem{das2025}
+Das, J., Hazarika, P.J., Alizadeh, M., Contreras-Reyes, J.E., Mohammad, H.H. and Yousof, H.M., 2025. Economic peaks and value-at-risk analysis: A novel approach using the Laplace distribution for house prices. \emph{Mathematical and Computational Applications}, \emph{30}(1), p.4.
+
+\bibitem{fa2022}
+Fa, A., 2022. LIME vs. SHAP. [Online] Available at: \url{https://medium.com/@afanta/lime-vs-shap-a92623e95c4}
+
+\bibitem{hoxha2025}
+Hoxha, V., 2025. Comparative analysis of machine learning models in predicting housing prices: a case study of Prishtina's real estate market. \emph{International Journal of Housing Markets and Analysis}, \emph{18}(3), pp.694-711.
+
+\bibitem{hu2025}
+Hu, G., 2025, May. Study on Real Estate Market Price Influencing Factors Based on Multiple Linear Regression Model. In \emph{2024 2th International Conference on Economic Management, Financial Innovation and Public Service (EMFIPS 2024)} (pp. 120-131). Atlantis Press.
+
+\bibitem{hussain2025}
+Hussain, M.I., Munir, A., Mamun, M., Chowdhury, S.H., Uddin, N. and Hossain, M.M., 2025. A Transparent House Price Prediction Framework Using Ensemble Learning, Genetic Algorithm-Based Tuning, and ANOVA-Based Feature Analysis. \emph{FinTech}, \emph{4}(3), p.33.
+
+\bibitem{jiang2025}
+Jiang, F.F., 2025. Gradient Boosting Decision Tree for House Price Prediction with Google Trends. \emph{Journal of Economics and Management Sciences}, \emph{8}(2), pp.p117-p117.
+
+\bibitem{jin2025}
+Jin, B. and Xu, X., 2025. Predictions of residential property price indices for China via machine learning models: B. Jin, X. Xu. \emph{Quality \& Quantity}, \emph{59}(Suppl 2), pp.1481-1513.
+
+\bibitem{konstantinov2021}
+Konstantinov, A.V. and Utkin, L.V., 2021. Interpretable machine learning with an ensemble of gradient boosting machines. \emph{Knowledge-Based Systems}, 222, p.106993.
+
+\bibitem{luo2025}
+Luo, L., Yang, X., Li, J., Song, Y. and Zhao, Z., 2025. Deciphering house prices by integrating street perceptions with a machine-learning algorithm: A case study of Xi'an, China. \emph{Cities}, \emph{156}, p.105542.
+
+\bibitem{madhuri2019}
+Madhuri, C.R., Anuradha, G. and Pujitha, M.V., 2019, March. House price prediction using regression techniques: A comparative study. In \emph{2019 International conference on smart structures and systems (ICSSS)} (pp. 1-5). IEEE.
+
+\bibitem{mete2025}
+Mete, M.O., 2025. Developing GeoAI Integrated Mass Valuation Model Based on LADM Valuation Information Great Britain Country Profile. \emph{Transactions in GIS}, \emph{29}(1), p.e13273.
+
+\bibitem{milunovich2020}
+Milunovich, G., 2020. Forecasting Australia's real house price index: A comparison of time series and machine learning methods. \emph{Journal of Forecasting}, \emph{39}(7), pp.1098-1118.
+
+\bibitem{pallonetto2019}
+Pallonetto, F., De Rosa, M., Milano, F. and Finn, D.P., 2019. Demand response algorithms for smart-grid ready residential buildings using machine learning models. \emph{Applied energy}, \emph{239}, pp.1265-1282.
+
+\bibitem{phan2018}
+Phan, T.D., 2018, December. Housing price prediction using machine learning algorithms: The case of Melbourne city, Australia. In \emph{2018 International conference on machine learning and data engineering (iCMLDE)} (pp. 35-42). IEEE.
+
+\bibitem{ray2019}
+Ray, S., 2019, February. A quick review of machine learning algorithms. In \emph{2019 International conference on machine learning, big data, cloud and parallel computing (COMITCon)} (pp. 35-39). IEEE.
+
+\bibitem{salman2024}
+Salman, H.A., Kalakech, A. and Steiti, A., 2024. Random forest algorithm overview. \emph{Babylonian Journal of Machine Learning}, \emph{2024}, pp.69-79.
+
+\bibitem{satish2019}
+Satish, G.N., Raghavendran, C.V., Rao, M.S. and Srinivasulu, C., 2019. House price prediction using machine learning. \emph{Journal of Innovative Technology and Exploring Engineering}, \emph{8}(9), pp.717-722.
+
+\bibitem{shbool2025}
+Shbool, M.A., Al-Dmour, R., Al-Shboul, B.A., Albashabsheh, N.T. and Almasarwah, N., 2025. Real estate decision-making: precision in price prediction through advanced machine learning algorithms. \emph{International Journal of Housing Markets and Analysis}.
+
+\bibitem{sudulaganti2024}
+Sudulaganti, S., 2024. UK House Price Prediction dataset 2015 to 2024. [Online] Available at: \url{https://www.kaggle.com/datasets/swarupsudulaganti/uk-house-price-prediction-dataset-2015-to-2024}
+
+\bibitem{sung2025}
+Sung, P.H., 2025. Advanced Machine Learning for Housing Market Analysis: Predicting Property Prices in Washington, DC. \emph{Authorea Preprints}.
+
+\bibitem{truong2020}
+Truong, Q., Nguyen, M., Dang, H. and Mei, B., 2020. Housing price prediction via improved machine learning techniques. \emph{Procedia Computer Science}, \emph{174}, pp.433-442.
+
+\bibitem{wu2022}
+Wu, Y., 2022, April. Linear regression in machine learning. In \emph{International Conference on Statistics, Applied Mathematics, and Computing Science (CSAMCS 2021)} (Vol. 12163, pp. 1253-1264). SPIE.
+
+\bibitem{zhamakeev2025}
+Zhamakeev, A. and Matanov, S., 2025. Real Estate Price Evaluation Using Machine Learning Models.
+
+\bibitem{zhao2019}
+Zhao, Y., Chetty, G. and Tran, D., 2019, December. Deep learning with XGBoost for real estate appraisal. In \emph{2019 IEEE symposium series on computational intelligence (SSCI)} (pp. 1396-1401). IEEE.
+
+\end{thebibliography}
+
+\end{document}
